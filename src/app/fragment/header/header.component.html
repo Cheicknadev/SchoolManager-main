@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SchoolManager</title>
+</head>
+<body id="img">
+<div >
+<nav class="navbar navbar-expand bg-MiddayBlue" style="font-family: Georgia">
+  <h1>SchoolManager</h1>
+    <a routerLink="home" class="offset-1"><img src="assets\img\logoT.png" width="80" alt=""  class="d-inline-block  mr-3"></a>
+    <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="navbar-brand offset-1" routerLink="home"> <b>Accueil</b></a>
+        </li>
+             <li class="nav-item">
+                <a class="nav-link" routerLink="#"> <b>Presentation</b></a>
+            </li>
+             <button
+                class="btn btn dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                aria-expanded="false"
+                mdbDropdownToggle
+                >
+                <span nz-icon nzType="bars" nzTheme="outline"><b>Services</b></span>
+              </button>
+               <li class="nav-item">
+         <div mdbDropdown class="dropdown">
+              <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" routerLink="connexion">Gestion des etudiants</a></li>
+                <li><a class="dropdown-item" routerLink="connexion">Gestion des administrations</a></li>
+                <li><a class="dropdown-item" routerLink="connexion">Gestion des enseignant</a></li>
+                <li><a class="dropdown-item" routerLink="connexion">Gestion des emploi du temps</a></li>
+                <li><a class="dropdown-item" routerLink="connexion">Gestion des payements</a></li>
+              </ul>
+            </div>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="Apropos"> <b>A propos</b></a>
+          </li>
+             <li class="nav-item">
+                <a class="nav-link" routerLink="Contact"> <b>contact</b></a>
+            </li>
+        </ul>
+    </div>
+    <form class="d-flex mt-10" role="search">
+    <a class="nav-link " routerLink="connexion"><b>login</b></a><a class="nav-link offset-1"   routerLink="SignUP"><b>SignUp</b> </a>
+    </form>
+</nav>
+</div>
+</body>
+</html>
+<router-outlet></router-outlet>

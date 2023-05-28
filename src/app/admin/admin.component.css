@@ -1,0 +1,9 @@
+h1{
+    text-align: center;
+    color: black;
+    font-family: Georgia;
+    transition: 2s;
+}
+h1:hover{
+    transform: scale(1.2);
+}

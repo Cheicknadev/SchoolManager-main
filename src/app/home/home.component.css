@@ -1,0 +1,15 @@
+h1{
+    font-family: 'Georgia';
+    font-size: 95px;
+    color: black;
+    text-align: center;
+}
+h1:hover{
+    transform: scale(1.2);
+    transition: transform 1.6s;
+}
+
+img:hover {
+    
+    background-image: "assets/img/student.jpg";
+  }

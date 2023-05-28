@@ -1,0 +1,54 @@
+  <div class="container" id="main-container">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="shadow p-3 mb-5 bg-body rounded" >
+          <div class="card">
+              <div class="card-header" id="idma">
+                <h5>La Liste des Produits</h5>
+              </div>
+                <div class="card-body">
+                  <form class="row g-3 transparent" id="formulaireTableEtudiantliste">
+                    <table class="table table-bordered">
+                      <thead class="thead-red">
+                        <tr>
+                          <th scope="col">Nom</th>
+                          <th scope="col">Prenom</th>
+                          <th scope="col">Matricule</th>
+                          <th scope="col">Date de Naissance</th>
+                          <th scope="col">Classe</th>
+                          <th scope="col">Telephone</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let etudiant of etudiants">
+  
+                          <td >{{etudiant.id}}</td>
+                          <td >{{etudiant.nom}}</td>
+                          <td >{{etudiant.prenom}}</td>
+                          <td>{{etudiant.matricule}}</td>
+                          <td>{{etudiant.dateNaissance}}</td>
+                        
+                          <td>{{etudiant.telephone}}</td>
+                          <td >
+                            <a class="btn btn-primary tooltips offset-1"  data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                            <a class="btn btn-danger tooltips offset-1"  data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                          <th scope="row" colspan="2">Effectif de la classe</th>
+                          <td colspan="2">etudiants.length</td>
+                        </tr>
+                      </tfoot>
+                      </table>
+                      </form>
+            </div>
+  
+        </div>
+    </div>
+    </div>
+    </div>
+  
+  

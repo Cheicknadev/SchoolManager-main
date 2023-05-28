@@ -1,0 +1,18 @@
+h1{
+    font-family: 'Georgia';
+    font-size: 95px;
+    font-style: oblique;
+    color: rgb(224, 32, 32);
+    text-align: center;
+    transition: 2s;
+}
+h1:hover{
+    transform: scale(1.2);
+}
+
+img{
+    transition: 2s;
+}
+img:hover{
+    transform: scale(1.2);
+}

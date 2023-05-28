@@ -1,0 +1,31 @@
+a{
+    color: black;
+}
+nav.h1{
+    font-family: 'Georgia';
+    font-size: 95px;
+    color: black;
+    text-align: center;
+}
+nav.h1:hover{
+    transform: scale(1.2);
+    transition: transform 1.6s;
+}
+body{
+    background-color: darkcyan;
+}
+img{
+    background-image:url(../../../assets/img/student.jpg);
+  }
+  div.nav{
+    height: 80px;
+    display: flex;
+    background: transparent;
+    background-color: transparent; 
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    font-size: 1.3rem;
+    border-bottom: 1px solid white; 
+}
