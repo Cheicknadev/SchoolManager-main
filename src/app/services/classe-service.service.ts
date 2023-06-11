@@ -9,29 +9,32 @@ import { Classe } from '../Interface/classe';
 })
 export class ClasseServiceService {
   private url = environment.apiBaseUrl;
-  constructor(private htttp:HttpClient) { }
+  constructor(private http:HttpClient) { }
   public getAllClasse():Observable<any>{
-    return this.htttp.get<any>(`${this.url}/getAllClasse`);
+    return this.http.get<any>(`${this.url}/getAllClasse`);
   }
   public createClasse(classe:Classe):Observable<Classe>{
-    return this.htttp.post<Classe>(`${this.url}/saveClasse`,classe);
+    return this.http.post<Classe>(`${this.url}/saveClasse`,classe);
   }
   public updateClasse(classe:Classe):Observable<Classe>{
-    return this.htttp.put<Classe>(`${this.url}/updateClasse`,classe);
+    return this.http.put<Classe>(`${this.url}/updateClasse`,classe);
   }
   public getClasseByLibelle(libelle:string):Observable<Classe>{
-    return this.htttp.get<Classe>(`${this.url}/getClasseByLibelle/${libelle}`);
+    return this.http.get<Classe>(`${this.url}/getClasseByLibelle/${libelle}`);
   }
   public deleteClasseById(id:number):Observable<void>{
-    return this.htttp.delete<void>(`${this.url}/deleteClasseById/${id}`);
+    return this.http.delete<void>(`${this.url}/deleteClasseById/${id}`);
   }
   public deleteClasse(classe:Classe):Observable<void>{
-    return this.htttp.delete<void>(`${this.url}/deleteClasse/${classe}`);
+    return this.http.delete<void>(`${this.url}/deleteClasse/${classe}`);
   }
   public getListeEtudiantByClasse(classe:Classe):Observable<Classe>{
-    return this.htttp.get<any>(`${this.url}/getAllEtudiantByClasse/${classe}`);
+    return this.http.get<any>(`${this.url}/getAllEtudiantByClasse/${classe}`);
   }
   public getAllEtudiantByLibelleClasse(libelle:string):Observable<any>{
-    return this.htttp.get<any>(`${this.url}/getAllEtudiantByLibelleClasse/${libelle}`);
+    return this.http.get<any>(`${this.url}/getAllEtudiantByLibelleClasse/${libelle}`);
+  }
+  public getAllEtudiantClassebyAbrege(abrege:string):Observable<any>{
+    return this.http.get<any>(`${this.url}/getAllEtudiantClasseByAbrege/${abrege}`);
   }
 }

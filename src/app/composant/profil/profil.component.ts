@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Administration } from 'src/app/Interface/administration';
 import { Enseignant } from 'src/app/Interface/enseignant';
 import { Etudiant } from 'src/app/Interface/etudiant';
@@ -23,7 +24,8 @@ export class ProfilComponent implements OnInit {
   ngOnInit(): void {
       this.getUsersById();
   }
-  constructor(private etudiantService:EtudiantServiceService,private enseignantService:EnseignantServiceService,private administrationService:AdministrateurServiceService,private authentificationService:AuthentificationServicesService){}
+  constructor(private etudiantService:EtudiantServiceService,private enseignantService:EnseignantServiceService,
+    private administrationService:AdministrateurServiceService,private authentificationService:AuthentificationServicesService,private router:Router){}
   public DiplayEtudiantHiddenOrPlayer():void{
     this.displayEtudiant = !this.displayEtudiant;
     this.displayAdministration = false;
@@ -47,10 +49,13 @@ export class ProfilComponent implements OnInit {
               console.log("Attribut enseignant : " + this.enseignant.nom)
             }
           );
-        }else if(reponse.type === ""){
+        }else if(reponse.type === "Censeur"){
+          this.administrationService.deleteAdministrationById(reponse.id).subscribe(
 
+            
+          );
         }else{
-
+          this.router.navigate(['/'])
         }
       }
     );

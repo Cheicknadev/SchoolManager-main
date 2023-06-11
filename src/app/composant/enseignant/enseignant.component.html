@@ -29,14 +29,7 @@
 
             </a>
           </li>
-          <!-- <li class="nav-item">
 
-            <span data-feather="bar-chart-2"><button class="nav-link" (click)="afficherChampNotes()" style="color:black;border: 0cqw;background-color: white;">Notes de classe</button></span><input type="text" [(ngModel)]="valeurNote" *ngIf="montrerChampNotes">
-          </li><br> -->
-          <!-- <li class="nav-item" >
-             <button class="nav-link" (click)="afficherChamp()"  style="color:black;border: 0cqw;background-color: white;" >Liste de classe</button>
-              <span data-feather="bar-chart-2"></span><input type="text" [(ngModel)]="valeur" *ngIf="montrerChamp" (ngModelChange)="searchClasse(valeur)">
-          </li> -->
           <li class="nav-item">
             <a type="button" (click)="DisplayOrHiddenListe()" >
               <span data-feather="users"> {{ DisplayListe ? 'Retour' : 'Liste de classe' }} <input type="text"  [(ngModel)]="valeur" *ngIf="montrerChamp" (ngModelChange)="searchClasse(valeur)"></span>
@@ -111,7 +104,7 @@
               {{ DisplayExport ? 'Retour' : 'Export' }}
             </button>
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" routerLink="Profil">
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" (click)="getPageProfile()">
             <span data-feather="calendar"></span>
             Profile
           </button>
@@ -124,33 +117,35 @@
     <div *ngSwitchCase="DisplayListe">
       <form>
         <div>
-          <!-- <img src="assets/img/profil.png" alt="" width="450"> -->
+
           <div id="idd" >
             <br>
           <div class="row justify-content-center" id="idCarte" >
             <div class="col-md-8">
               <div class="shadow p-3 mb-5 bg-body rounded" >
-                <div class="card">
-                    <div class="card-header">
+                <div class="card" >
+                    <div class="card-header" style="background-color: dimgrey;">
 
                     </div>
-                      <div class="card-body">
+                      <div class="card-body" style="background-color: cornflowerblue;">
                         <h3>Liste des etudiants de la classe </h3>
                   </div>
+                  <hr>
                   <form class="row g-3 transparent " id="formulairDemadeEmploi" >
                     <div *ngFor="let classe of classes">
-                    <hr>
+                      <hr>
                   <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
                     <div class="d-flex w-100 align-items-center justify-content-between">
-                      <strong class="mb-2"><label for="">Nom de l'etudiant: </label>{{classe.abrege}}</strong>
-                      <small class="text-muted"><label for="">Date de naissance : </label>{{classe.description}}</small>
+                      <strong class="mb-2"><label for="">Abrege de la classe : </label>{{classe.abrege}}</strong>
+                      <small class="text-muted"><label for="">Description de la classe : </label>{{classe.description}}</small>
                     </div>
-                    <strong class="col-20 lg-2 small"><label for="">Prenom de l'etudiant: </label>{{classe.libelle}}</strong><br>
-                    <!-- <strong class="col-20 lg-2 small"><label for="">Numero de Telephone: </label>{{etudiant.telephone}}</strong><br> -->
+                    <strong class="col-20 lg-2 small"><label for="">Libelle de la classe : </label>{{classe.libelle}}</strong><br>
+
                   </a>
                   <div class="row">
-                    <hr>
-                    <div class="col-md-3"><button class="btn btn-success offset-2" type="submit">Ajouter</button></div>
+
+                    <div class="col-md-3"><button class="btn btn-success offset-2" type="submit" style="background-color: rgb(38, 104, 104);">Ajouter</button></div>
+                    <div class="col-md-3"><button class="btn btn-success offset-2" type="submit" style="background-color:rgb(0, 217, 255);">Liste</button></div>
                     <div class="col-md-3"><button class="btn btn-secondary offset-2" type="submit">Modifier</button></div>
                   </div>
                     </div>
@@ -174,11 +169,13 @@
         <!-- Display Absence -->
     <div *ngSwitchCase="DisplayAbsence">
       <form >
-        <table>
+        <table title="La liste des absences d'enseignant">
           <tr>
             <th>Jour d'abscence</th>
             <th>Cours</th>
             <th>Etat d'abscence</th>
+            <th>Nom du prof</th>
+            <th>Justificatif</th>
           </tr>
           <tr *ngFor="let absence of absences" >
            <td>{{enseignant.nom}}</td>

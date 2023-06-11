@@ -60,6 +60,9 @@ import { CenseurComponent } from './composant/censeur/censeur.component';
 import { SecretaireComponent } from './composant/secretaire/secretaire.component';
 import { SignUpComponent } from './composant/sign-up/sign-up.component';
 import { AproposComponent } from './composant/apropos/apropos.component';
+import { EmploieDuTempsServiceService } from './services/emploie-du-temps-service.service';
+import { ClasseServiceService } from './services/classe-service.service';
+import { ProfileEntiteComponent } from './profile-entite/profile-entite.component';
 
 
 
@@ -119,6 +122,7 @@ const routes: Routes = [
     SecretaireComponent,
     SignUpComponent,
     AproposComponent,
+    ProfileEntiteComponent,
   ],
   imports: [
     BrowserModule,
@@ -131,7 +135,7 @@ const routes: Routes = [
   ],
   exports:[RouterModule],
   providers: [AuthentificationServicesService,EtudiantServiceService,EnseignantServiceService,AdministrateurServiceService,NotesServicesService,
-  MaterielServiceService,FactureServiceService,ConvocationServiceService,PayementServiceService],
+  MaterielServiceService,FactureServiceService,ConvocationServiceService,PayementServiceService,EmploieDuTempsServiceService,ClasseServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

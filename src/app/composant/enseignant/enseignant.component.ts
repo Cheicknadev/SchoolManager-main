@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrComponentlessModule } from 'ngx-toastr';
 import { Absence } from 'src/app/Interface/absence';
 import { Classe } from 'src/app/Interface/classe';
@@ -8,6 +9,7 @@ import { Etudiant } from 'src/app/Interface/etudiant';
 import { Note } from 'src/app/Interface/note';
 import { AbsenceServiceService } from 'src/app/services/absence-service.service';
 import { ClasseServiceService } from 'src/app/services/classe-service.service';
+import { EmploieDuTempsServiceService } from 'src/app/services/emploie-du-temps-service.service';
 import { EnseignantServiceService } from 'src/app/services/enseignant-service.service';
 import { EtudiantServiceService } from 'src/app/services/etudiant-service.service';
 import { NotesServicesService } from 'src/app/services/notes-services.service';
@@ -25,8 +27,9 @@ export class EnseignantComponent implements OnInit{
   public etudiants : Etudiant []=[];
   public absences : Absence[] = [];
   public classes :Classe[]= [];
+  public idEtudiant:number;
   enseignant:Enseignant;
-constructor(private enseignantService:EnseignantServiceService,private absenceService:AbsenceServiceService,private  classeServices:ClasseServiceService){}
+constructor(private enseignantService:EnseignantServiceService,private absenceService:AbsenceServiceService,private  classeServices:ClasseServiceService,private etudiantService:EtudiantServiceService,private notesService:NotesServicesService,private emploiDuTempsService:EmploieDuTempsServiceService,private router:Router){}
 
 ngOnInit(): void {
   this.getAllClasses();
@@ -56,21 +59,7 @@ ngOnInit(): void {
   DisplayChat:boolean = false;
   //...
   DisplayListe:boolean = false;
-  // public onOpenModals( mode: string): void{
-  //   const container = document.getElementById('main-container');
-  //   const button = document.createElement('button');
-  //   button.type = 'button';
-  //   button.style.display = 'none';
-  //   button.setAttribute('data-toggle', 'modal');
-  //   if (mode === 'bulletinDisplay') {
-  //     button.setAttribute('data-target', '#BulletinDisplayModal');
-  //   }
-  //   if (mode === 'noteDisplay') {
-  //     button.setAttribute('data-target', '#NoteDisplayModal');
-  //   }
-  //   container?.appendChild(button);
-  //   button.click()  ;
-  // }
+
   public afficherChamp():void {
     if(this.montrerChampNotes === false){
       this.montrerChamp = !this.montrerChamp;
@@ -78,9 +67,6 @@ ngOnInit(): void {
       this.montrerChampNotes = false
       this.montrerChamp = !this.montrerChamp;
     }
-
-  }
-  public afficherChampListeEtudiant():void{
 
   }
   public afficherChampNotes():void {
@@ -246,8 +232,12 @@ ngOnInit(): void {
     );
   }
   public getEmploiDuTempsByEnseignant():void{
-    let id = localStorage.getItem("Id");
+   let id = localStorage.getItem("Id");
+    this.enseignantService.getEnseignantById(Number(id)).forEach(
+      (reponseEnseignant:Enseignant)=>{
 
+      }
+    );
   }
   public getAllListeEtudiantByLibelleClasse(libelle:string):void{
     this.classeServices.getAllEtudiantByLibelleClasse(libelle).subscribe(
@@ -260,8 +250,10 @@ ngOnInit(): void {
 
     );
   }
+  public getPageProfile():void{
+    this.router.navigate(['/Profile']);
+  }
   public searchClasse(valeur: string): void {
-    console.log(valeur);
     const results: Classe[] = [];
       for(let classe of this.classes){
       if (classe.libelle.toLowerCase().indexOf(valeur.toLowerCase()) !== -1
@@ -273,7 +265,7 @@ ngOnInit(): void {
       this.classes = results;
       }
       if (results.length === 0 || !valeur) {
-        //this.getAllClasses();
+        this.getAllClasses();
 
       }
     }
@@ -294,15 +286,14 @@ ngOnInit(): void {
         }
       );
     }
- /* public saveNotes(notes:Note):void{
-    let id = localStorage.getItem("Id");
-    this.etudiantService.getEtudiantById(Number(id)).subscribe(
-      (reponse:Etudiant)=>{
-        notes.etudiant = reponse;
-        this.noteService.ajouterNoteEtudiant(notes).subscribe(
+  public saveNotes(notes:Note):void{
+    this.etudiantService.getEtudiantById(this.idEtudiant).subscribe(
+      );
+  }
+  public getListeEtudiantByClasse(abrege:string):void{
+    this.classeServices.getAllEtudiantClassebyAbrege(abrege).subscribe(
 
-        );
-      }
     );
-  }*/
+  }
 }
+

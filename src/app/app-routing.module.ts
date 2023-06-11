@@ -14,6 +14,7 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { SignUpComponent } from './composant/sign-up/sign-up.component';
 import { AproposComponent } from './composant/apropos/apropos.component';
 import { ProfilComponent } from './composant/profil/profil.component';
+import { ProfileEntiteComponent } from './profile-entite/profile-entite.component';
 
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
   {path:"Inscription",component:InscriptionComponent},
   {path:"SignUP",component:SignUpComponent},
   {path:"Apropos",component:AproposComponent},
-  {path:"Profil",component:ProfilComponent}
+  {path:"Profile",component:ProfilComponent},
+  {path:"ProfileEntite",component:ProfileEntiteComponent}
 ];
 
 @NgModule({
