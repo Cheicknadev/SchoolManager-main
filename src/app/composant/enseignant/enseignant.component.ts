@@ -7,12 +7,14 @@ import { Classe } from 'src/app/Interface/classe';
 import { Enseignant } from 'src/app/Interface/enseignant';
 import { Etudiant } from 'src/app/Interface/etudiant';
 import { Note } from 'src/app/Interface/note';
+import { SupportCours } from 'src/app/Interface/support-cours';
 import { AbsenceServiceService } from 'src/app/services/absence-service.service';
 import { ClasseServiceService } from 'src/app/services/classe-service.service';
 import { EmploieDuTempsServiceService } from 'src/app/services/emploie-du-temps-service.service';
 import { EnseignantServiceService } from 'src/app/services/enseignant-service.service';
 import { EtudiantServiceService } from 'src/app/services/etudiant-service.service';
 import { NotesServicesService } from 'src/app/services/notes-services.service';
+import { SupportCoursService } from 'src/app/services/support-cours.service';
 
 @Component({
   selector: 'enseignant',
@@ -28,8 +30,12 @@ export class EnseignantComponent implements OnInit{
   public absences : Absence[] = [];
   public classes :Classe[]= [];
   public idEtudiant:number;
+  supportCours: SupportCours[] = [];
+  selectedItem: any = {};
+  isNewItem: boolean = false;
+  etudiant:Etudiant;
   enseignant:Enseignant;
-constructor(private enseignantService:EnseignantServiceService,private absenceService:AbsenceServiceService,private  classeServices:ClasseServiceService,private etudiantService:EtudiantServiceService,private notesService:NotesServicesService,private emploiDuTempsService:EmploieDuTempsServiceService,private router:Router){}
+constructor(private enseignantService:EnseignantServiceService,private absenceService:AbsenceServiceService,private  classeServices:ClasseServiceService,private etudiantService:EtudiantServiceService,private notesService:NotesServicesService,private emploiDuTempsService:EmploieDuTempsServiceService,private router:Router,private supportService:SupportCoursService){}
 
 ngOnInit(): void {
   this.getAllClasses();
@@ -250,6 +256,72 @@ ngOnInit(): void {
 
     );
   }
+
+  // Charger tous les éléments
+  loadItems(): void {
+    this.supportService.getAllSupportCours().subscribe(
+      (items: any[]) => {
+        this.supportCours = items;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  // Sélectionner un élément
+  selectSupportCours(item: any): void {
+    this.selectedItem = { ...this.supportCours };
+    this.isNewItem = false;
+  }
+
+  // Réinitialiser le formulaire
+  resetForm(): void {
+    this.selectedItem = {};
+    this.isNewItem = true;
+  }
+
+  // Enregistrer un élément (créer ou mettre à jour)
+  saveSupportCours(): void {
+    if (this.isNewItem) {
+      this.supportService.createSupportCours(this.selectedItem).subscribe(
+        (response: any) => {
+          console.log('Item created successfully');
+          this.loadItems();
+          this.resetForm();
+        },
+        (error: any) => {
+          console.error(error);
+        }
+      );
+    } else {
+      this.supportService.updateSupportCours(this.selectedItem).subscribe(
+        (response: any) => {
+          console.log('Item updated successfully');
+          this.loadItems();
+          this.resetForm();
+        },
+        (error: any) => {
+          console.error(error);
+        }
+      );
+    }
+  }
+
+  // Supprimer un élément
+  deleteSupportCours(id: number): void {
+    this.supportService.deleteSupportCoursById(id).subscribe(
+      (response: any) => {
+        console.log('Item deleted successfully');
+        this.loadItems();
+        this.resetForm();
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
   public getPageProfile():void{
     this.router.navigate(['/Profile']);
   }
@@ -266,12 +338,10 @@ ngOnInit(): void {
       }
       if (results.length === 0 || !valeur) {
         this.getAllClasses();
-
       }
     }
     public getAllListeAbscenceEnseignant():void{
       let id = localStorage.getItem("id");
-      console.log("Id :"+ id);
       this.enseignantService.getEnseignantById(Number(id)).subscribe(
         (reponse:Enseignant) =>{
           this.enseignant = reponse;
@@ -288,12 +358,21 @@ ngOnInit(): void {
     }
   public saveNotes(notes:Note):void{
     this.etudiantService.getEtudiantById(this.idEtudiant).subscribe(
+      (reponseEtudiant:Etudiant) =>{
+        this.etudiant = reponseEtudiant;
+      }
       );
   }
   public getListeEtudiantByClasse(abrege:string):void{
     this.classeServices.getAllEtudiantClassebyAbrege(abrege).subscribe(
-
+  (reponse:Etudiant[]) =>{
+      this.etudiants = reponse;
+  },
+  (error:HttpErrorResponse) =>{
+    alert(error.message);
+  }
     );
   }
+
 }
 

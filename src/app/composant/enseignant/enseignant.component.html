@@ -20,7 +20,6 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">
               <span data-feather="home"></span>
-
             </a>
           </li>
           <li class="nav-item">
@@ -201,19 +200,73 @@
 
     <!-- Display Support -->
     <div *ngSwitchCase="DisplaySupport">
-      <form>
-        <div><img src="assets/img/support.PNG" alt="" width="450"></div>
-      </form>
-    </div>
+      <h1>Suppot du cours</h1>
 
-    <!-- Display Profil -->
-    <div *ngSwitchCase="DisplayProfil">
+<!-- Afficher la liste des éléments -->
+      <ul>
+        <li *ngFor="let item of supportCours" (click)="selectSupportCours(item)">
+
+        </li>
+      </ul>
+
+<!-- Formulaire pour ajouter ou mettre à jour un élément -->
       <form>
-        <div>
-          <img src="assets/img/profil.png" alt="" width="450">
-        </div>
+        <fieldset>
+          <legend>ajouter le support du cours</legend>
+          <div>
+            <label for="name">Nom du cours : </label>
+            <input [(ngModel)]="selectedItem.name" placeholder="Nom du cours " /><br />
+          </div>
+          <div>
+            <label for="date">Date de depot : </label>
+            <input type="date" [(ngModel)]="selectedItem.dateCours" placeholder="date de depot" /><br />
+          </div>
+          <div>
+            <label for="classe">Nom de la classe : </label>
+            <input [(ngModel)]="selectedItem.classe" placeholder="Nom de la classe" /><br />
+          </div>
+          <div>
+            <label for="fichier">Ficher : </label>
+            <input [(ngModel)]="selectedItem.fichier" placeholder="Fichier du cours" /><br />
+          </div>
+        </fieldset>
+        <button (click)="saveSupportCours()">{{ isNewItem ? 'Create' : 'Update' }}</button>
+        <button (click)="resetForm()">Cancel</button>
       </form>
-    </div>
+
+     <!-- Bouton pour supprimer un élément -->
+        <button *ngIf="!isNewItem" (click)="deleteSupportCours(selectedItem.id)">Delete</button><h1>Items</h1>
+
+        <!-- Afficher la liste des éléments -->
+        <ul>
+          <li *ngFor="let item of supportCours" (click)="selectSupportCours(item)">
+
+          </li>
+        </ul>
+
+        <!-- Formulaire pour ajouter ou mettre à jour un élément -->
+        <form>
+          <input [(ngModel)]="selectedItem.name" placeholder="Name" /><br />
+          <textarea [(ngModel)]="selectedItem.description" placeholder="Description"></textarea><br />
+          <button (click)="saveSupportCours()">{{ isNewItem ? 'Create' : 'Update' }}</button>
+          <button (click)="resetForm()">Cancel</button>
+        </form>
+
+        <!-- Bouton pour supprimer un élément -->
+        <button *ngIf="!isNewItem" (click)="deleteSupportCours(selectedItem.id)">Delete</button>
+              <form>
+                <div><img src="assets/img/support.PNG" alt="" width="50"></div>
+              </form>
+            </div>
+
+            <!-- Display Profil -->
+            <div *ngSwitchCase="DisplayProfil">
+              <form>
+                <div>
+                  <img src="assets/img/profil.png" alt="" width="450">
+                </div>
+              </form>
+            </div>
 
     <!-- Default case (DisplayEmploi) -->
     <div *ngSwitchDefault>
