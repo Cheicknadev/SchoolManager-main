@@ -5,6 +5,6 @@ export interface Classe {
     abrege:string;
     anneeScolaire:Date;
     enseignantPrincipal:string;
-    listeEtudiant:File;
-    listeEnseignant:File;
+    listeEtudiant:any;
+    listeEnseignant:any;
 }

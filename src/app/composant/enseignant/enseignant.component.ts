@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrComponentlessModule } from 'ngx-toastr';
 import { Absence } from 'src/app/Interface/absence';
@@ -91,6 +92,7 @@ ngOnInit(): void {
     this.DisplayReclation = false;
     this.DisplaySupport = false;
     this.DisplayProfil = false;
+    this.DisplayListe = false;
 
   }
   DisplayOrHiddenExport():void{
@@ -101,7 +103,7 @@ ngOnInit(): void {
     this.DisplayReclation = false;
     this.DisplaySupport = false;
     this.DisplayProfil = false;
-
+    this.DisplayListe = false;
   }
   DisplayOrHiddenEmploiDuTemps():void{
     this.DisplayEmploiDuTemps = !this.DisplayEmploiDuTemps;
@@ -112,7 +114,7 @@ ngOnInit(): void {
     this.DisplayReclation = false;
     this.DisplaySupport = false;
     this.DisplayProfil = false;
-
+    this.DisplayListe = false;
   }
   DisplayOrHiddenConvocation():void{
     this.DisplayConvocation = !this.DisplayConvocation;
@@ -123,6 +125,7 @@ ngOnInit(): void {
     this.DisplaySupport = false;
     this.DisplayProfil = false;
     this.DisplayEmploiDuTemps = false;
+    this.DisplayListe = false;
   }
   DisplayOrHiddenAbsence():void{
     this.DisplayAbsence = !this.DisplayAbsence
@@ -133,6 +136,7 @@ ngOnInit(): void {
     this.DisplayConvocation = false;
     this.DisplayProfil = false;
     this.DisplayEmploiDuTemps = false;
+    this.DisplayListe = false;
   }
   DisplayOrHiddenGererControl():void{
     this.DisplayGererControl = !this.DisplayGererControl
@@ -143,6 +147,7 @@ ngOnInit(): void {
     this.DisplayConvocation = false;
     this.DisplayProfil = false;
     this.DisplayAbsence = false;
+    this.DisplayListe = false;
   }
   DisplayOrHiddenReclation():void{
     this.DisplayReclation = !this.DisplayReclation
@@ -153,9 +158,10 @@ ngOnInit(): void {
     this.DisplayConvocation = false;
     this.DisplayProfil = false;
     this.DisplayAbsence = false;
+    this.DisplayListe = false;
   }
   DisplayOrHiddenEmploi():void{
-
+    this.DisplayEmploiDuTemps = !this.DisplayEmploiDuTemps;
     this.DisplayReclation = false;
     this.DisplayShare = false;
     this.DisplayExport = false;
@@ -164,7 +170,9 @@ ngOnInit(): void {
     this.DisplayConvocation = false;
     this.DisplayProfil = false;
     this.DisplayAbsence = false;
+    this.DisplayListe = false;
   }
+
   DisplayOrHiddenSupport():void{
     this.DisplaySupport = !this.DisplaySupport
     this.DisplayShare = false;
@@ -175,6 +183,8 @@ ngOnInit(): void {
     this.DisplayProfil = false;
     this.DisplayAbsence = false;
     this.DisplayChat = false;
+    this.DisplayListe = false;
+
   }
   DisplayOrHiddenChat():void{
     this.DisplayChat = !this.DisplayChat;
@@ -186,6 +196,7 @@ ngOnInit(): void {
     this.DisplayConvocation = false;
     this.DisplayProfil = false;
     this.DisplayAbsence = false;
+    this.DisplayListe = false;
   }
   DisplayOrHiddenProfil():void{
     this.DisplayProfil = !this.DisplayProfil
@@ -356,10 +367,25 @@ ngOnInit(): void {
         }
       );
     }
-  public saveNotes(notes:Note):void{
-    this.etudiantService.getEtudiantById(this.idEtudiant).subscribe(
+    public listeEtudiants(addForm:NgForm):void{
+      this.classeServices.getAllEtudiantClassebyAbrege(addForm.value).subscribe(
+        (reponses:Etudiant[]) =>{
+          this.etudiants = reponses;
+        },
+        (error:HttpErrorResponse) =>{
+          alert(error.message);
+        }
+      )
+    }
+  public saveNotes(id:number,note:Note):void{
+    this.etudiantService.getEtudiantById(id).subscribe(
       (reponseEtudiant:Etudiant) =>{
-        this.etudiant = reponseEtudiant;
+       this.notesService.ajouterNoteEtudiant(note).subscribe(
+        (noteEtudiant:Note) =>{
+          alert("");
+        }
+       );
+
       }
       );
   }

@@ -124,31 +124,30 @@
               <div class="shadow p-3 mb-5 bg-body rounded" >
                 <div class="card" >
                     <div class="card-header" style="background-color: dimgrey;">
-
+                      <h3>Liste des etudiants de la classe </h3>
                     </div>
                       <div class="card-body" style="background-color: cornflowerblue;">
-                        <h3>Liste des etudiants de la classe </h3>
+                        <form class="row g-3 transparent " id="formulairDemadeEmploi" #addForm="ngForm" (ngSubmit)="listeEtudiants(addForm)">
+                          <table title="La liste des etudiants">
+                            <tr>
+                              <th>Nom</th>
+                              <th>Prenom</th>
+                              <th>Classe</th>
+                              <th>Age</th>
+                              <th>Action</th>
+                            </tr>
+                            <tr *ngFor="let etudiant of etudiants" >
+                             <td>{{etudiant.nom}}</td>
+                             <td>{{etudiant.prenom}}</td>
+                             <td>{{etudiant.numeroEtudiant}}</td>
+                             <td>
+                              <input type="button" name="note" value="Note" />
+                              <input type="button" name="modifier" value="Modifier" />
+                             </td>
+                            </tr>
+                          </table>
+                        </form>
                   </div>
-                  <hr>
-                  <form class="row g-3 transparent " id="formulairDemadeEmploi" >
-                    <div *ngFor="let classe of classes">
-                      <hr>
-                  <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                      <strong class="mb-2"><label for="">Abrege de la classe : </label>{{classe.abrege}}</strong>
-                      <small class="text-muted"><label for="">Description de la classe : </label>{{classe.description}}</small>
-                    </div>
-                    <strong class="col-20 lg-2 small"><label for="">Libelle de la classe : </label>{{classe.libelle}}</strong><br>
-
-                  </a>
-                  <div class="row">
-
-                    <div class="col-md-3"><button class="btn btn-success offset-2" type="submit" style="background-color: rgb(38, 104, 104);">Ajouter</button></div>
-                    <div class="col-md-3"><button class="btn btn-success offset-2" type="submit" style="background-color:rgb(0, 217, 255);">Liste</button></div>
-                    <div class="col-md-3"><button class="btn btn-secondary offset-2" type="submit">Modifier</button></div>
-                  </div>
-                    </div>
-                  </form>
               </div>
           </div>
           </div>
